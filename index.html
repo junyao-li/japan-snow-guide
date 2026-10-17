@@ -1,0 +1,2180 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Japan Snow Guide — 探索、收藏並比較 25 座代表性日本滑雪場。">
+  <meta name="theme-color" content="#f5f3ed">
+  <title>Japan Snow Guide｜日本滑雪場指南</title>
+  <style>
+    :root {
+      --paper: #f5f3ed;
+      --paper-2: #ebe8df;
+      --ink: #162521;
+      --muted: #64716d;
+      --line: rgba(22, 37, 33, .14);
+      --pine: #183f36;
+      --pine-2: #24574a;
+      --snow: #fcfcf9;
+      --coral: #dd684f;
+      --blue: #739bb5;
+      --shadow: 0 20px 60px rgba(26, 49, 43, .10);
+      --radius-lg: 30px;
+      --radius-md: 20px;
+      --radius-sm: 12px;
+      --container: min(1180px, calc(100% - 40px));
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    body.modal-open { overflow: hidden; }
+    button, input, select { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    a { color: inherit; }
+    img, svg { display: block; max-width: 100%; }
+    [hidden] { display: none !important; }
+    .sr-only {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0, 0, 0, 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 1000;
+      transform: translateY(-150%);
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: var(--ink);
+      color: white;
+    }
+    .skip-link:focus { transform: translateY(0); }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid transparent;
+      background: rgba(245, 243, 237, .84);
+      backdrop-filter: blur(16px);
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+    .site-header.scrolled {
+      border-color: var(--line);
+      box-shadow: 0 8px 24px rgba(22, 37, 33, .05);
+    }
+    .nav-wrap {
+      width: var(--container);
+      min-height: 76px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: .06em;
+    }
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: white;
+      background: var(--pine);
+    }
+    .brand small {
+      display: block;
+      color: var(--muted);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .2em;
+      line-height: 1.2;
+    }
+    .main-nav { display: flex; align-items: center; gap: 6px; }
+    .main-nav a {
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: #40504b;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      transition: background .2s ease, color .2s ease;
+    }
+    .main-nav a:hover, .main-nav a:focus-visible { background: white; color: var(--pine); outline: none; }
+    .nav-cta { border: 1px solid var(--line); }
+    .nav-tool {
+      min-height: 38px;
+      padding: 8px 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--pine);
+      background: rgba(255,255,255,.54);
+      font-size: 12px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+    .nav-tool b {
+      min-width: 20px;
+      height: 20px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: white;
+      background: var(--coral);
+      font-size: 9px;
+    }
+    .menu-button {
+      width: 44px;
+      height: 44px;
+      display: none;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      color: var(--ink);
+      background: transparent;
+      cursor: pointer;
+    }
+
+    main { overflow: hidden; }
+    section { scroll-margin-top: 92px; }
+    .hero {
+      width: var(--container);
+      min-height: 690px;
+      margin: 0 auto;
+      padding: 72px 0 54px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(380px, .95fr);
+      align-items: center;
+      gap: 56px;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 20px;
+      color: var(--pine-2);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: currentColor;
+    }
+    .hero h1 {
+      max-width: 720px;
+      margin: 0;
+      font-family: "Yu Mincho", "Noto Serif TC", serif;
+      font-size: clamp(48px, 6.8vw, 92px);
+      font-weight: 500;
+      letter-spacing: -.065em;
+      line-height: .98;
+    }
+    .hero h1 .accent { color: var(--coral); }
+    .hero-lead {
+      max-width: 590px;
+      margin: 28px 0 30px;
+      color: #52615c;
+      font-size: clamp(16px, 1.55vw, 20px);
+      line-height: 1.85;
+    }
+    .hero-search {
+      max-width: 610px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 8px 8px 18px;
+      border: 1px solid rgba(24, 63, 54, .16);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, .72);
+      box-shadow: 0 14px 40px rgba(24, 63, 54, .08);
+    }
+    .hero-search:focus-within { outline: 3px solid rgba(115, 155, 181, .28); }
+    .hero-search svg { flex: 0 0 auto; color: var(--muted); }
+    .hero-search input {
+      min-width: 0;
+      flex: 1;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: var(--ink);
+    }
+    .hero-search button, .button-primary {
+      border: 0;
+      border-radius: 12px;
+      color: white;
+      background: var(--pine);
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform .2s ease, background .2s ease;
+    }
+    .hero-search button { padding: 12px 18px; white-space: nowrap; }
+    .hero-search button:hover, .button-primary:hover { background: var(--pine-2); transform: translateY(-1px); }
+    .hero-meta {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .hero-meta span { display: inline-flex; align-items: center; gap: 7px; }
+    .hero-meta i {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--coral);
+    }
+    .hero-inline-quiz {
+      margin-top: 16px;
+      padding: 0;
+      border: 0;
+      border-bottom: 1px solid rgba(24,63,54,.28);
+      color: var(--pine);
+      background: transparent;
+      font-size: 12px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+    .hero-inline-quiz:hover { color: var(--coral); border-color: var(--coral); }
+
+    .hero-art {
+      position: relative;
+      min-height: 530px;
+      border-radius: 48% 48% 28px 28px / 32% 32% 28px 28px;
+      overflow: hidden;
+      background: linear-gradient(180deg, #c3d6dc 0%, #dce5e3 42%, #f7f7f2 100%);
+      box-shadow: var(--shadow);
+    }
+    .sun {
+      position: absolute;
+      top: 62px;
+      right: 58px;
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: #e37057;
+      box-shadow: 0 0 0 18px rgba(255,255,255,.12);
+    }
+    .mountain {
+      position: absolute;
+      left: -14%;
+      right: -14%;
+      bottom: 80px;
+      height: 58%;
+      background: var(--pine);
+      clip-path: polygon(0 88%, 17% 56%, 27% 66%, 51% 8%, 65% 48%, 76% 28%, 100% 90%, 100% 100%, 0 100%);
+    }
+    .mountain-snow {
+      position: absolute;
+      left: -8%;
+      right: -8%;
+      bottom: 93px;
+      height: 47%;
+      background: #f9f9f5;
+      clip-path: polygon(0 96%, 24% 65%, 31% 72%, 54% 3%, 59% 30%, 66% 25%, 77% 43%, 100% 96%, 100% 100%, 0 100%);
+    }
+    .snow-field {
+      position: absolute;
+      inset: auto 0 0;
+      height: 128px;
+      background: #fbfbf8;
+    }
+    .trail {
+      position: absolute;
+      left: 55%;
+      bottom: -22px;
+      width: 150px;
+      height: 160px;
+      border: 3px solid transparent;
+      border-left-color: rgba(115, 155, 181, .4);
+      border-radius: 50%;
+      transform: rotate(20deg);
+    }
+    .tree {
+      position: absolute;
+      bottom: 72px;
+      width: 0;
+      height: 0;
+      border-left: 18px solid transparent;
+      border-right: 18px solid transparent;
+      border-bottom: 68px solid #214a40;
+    }
+    .tree::after {
+      content: "";
+      position: absolute;
+      top: 24px;
+      left: -24px;
+      width: 0;
+      height: 0;
+      border-left: 24px solid transparent;
+      border-right: 24px solid transparent;
+      border-bottom: 78px solid #214a40;
+    }
+    .tree-1 { left: 12%; transform: scale(.8); }
+    .tree-2 { left: 22%; bottom: 60px; transform: scale(.55); }
+    .tree-3 { right: 12%; bottom: 55px; transform: scale(.7); }
+    .art-card {
+      position: absolute;
+      right: 24px;
+      bottom: 22px;
+      z-index: 3;
+      width: min(240px, 65%);
+      padding: 18px 20px;
+      border: 1px solid rgba(255,255,255,.78);
+      border-radius: 16px;
+      background: rgba(250, 250, 246, .86);
+      box-shadow: 0 12px 30px rgba(25, 56, 48, .12);
+      backdrop-filter: blur(10px);
+    }
+    .art-card small { color: var(--muted); font-size: 10px; font-weight: 800; letter-spacing: .14em; }
+    .art-card strong { display: block; margin-top: 5px; font-family: "Yu Mincho", serif; font-size: 20px; font-weight: 600; }
+
+    .manifesto {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,.35);
+    }
+    .manifesto-inner {
+      width: var(--container);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.2fr repeat(3, .6fr);
+      gap: 20px;
+      align-items: stretch;
+    }
+    .manifesto-copy { padding: 38px 32px 38px 0; border-right: 1px solid var(--line); }
+    .manifesto-copy strong { display: block; margin-bottom: 6px; font-size: 16px; }
+    .manifesto-copy p { margin: 0; color: var(--muted); font-size: 13px; }
+    .metric { padding: 34px 18px; display: flex; flex-direction: column; justify-content: center; }
+    .metric strong { font-family: "Yu Mincho", serif; font-size: 28px; font-weight: 500; line-height: 1; }
+    .metric span { margin-top: 8px; color: var(--muted); font-size: 11px; font-weight: 700; letter-spacing: .08em; }
+
+    .finder, .explore, .map-inner { width: var(--container); margin: 0 auto; }
+    .finder { padding: 112px 0; }
+    .explore { padding: 112px 0 120px; }
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+    .section-head h2, .about h2, .roadmap h2, .finder h2, .map-section h2 {
+      margin: 0;
+      font-family: "Yu Mincho", "Noto Serif TC", serif;
+      font-size: clamp(34px, 4.6vw, 58px);
+      font-weight: 500;
+      letter-spacing: -.04em;
+      line-height: 1.12;
+    }
+    .section-head p { max-width: 430px; margin: 0; color: var(--muted); }
+
+    .finder-card {
+      position: relative;
+      min-height: 390px;
+      padding: clamp(30px, 5vw, 62px);
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      align-items: center;
+      gap: 60px;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      color: white;
+      background: var(--pine);
+      box-shadow: var(--shadow);
+    }
+    .finder-card::before {
+      content: "";
+      position: absolute;
+      width: 340px;
+      height: 340px;
+      right: -70px;
+      top: -110px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 50%;
+      box-shadow: 0 0 0 45px rgba(255,255,255,.025), 0 0 0 90px rgba(255,255,255,.018);
+    }
+    .finder-card .eyebrow { color: #b9d7ce; }
+    .finder-card h2 { max-width: 590px; }
+    .finder-card p { max-width: 620px; margin: 22px 0 0; color: #bdd0ca; }
+    .finder-action { position: relative; z-index: 2; padding: 30px; border: 1px solid rgba(255,255,255,.13); border-radius: 22px; background: rgba(255,255,255,.055); }
+    .finder-action strong { display: block; margin-bottom: 8px; font-family: "Yu Mincho", serif; font-size: 26px; font-weight: 600; }
+    .finder-action p { margin: 0 0 22px; color: #b8cbc5; font-size: 13px; }
+    .finder-start {
+      width: 100%;
+      min-height: 52px;
+      border: 0;
+      border-radius: 13px;
+      color: var(--pine);
+      background: #f5f3ed;
+      font-weight: 900;
+      cursor: pointer;
+      transition: transform .2s ease, background .2s ease;
+    }
+    .finder-start:hover { transform: translateY(-2px); background: white; }
+    .finder-caption { display: block; margin-top: 12px; color: #91aaa2; font-size: 10px; text-align: center; }
+
+    .map-section { padding: 110px 0; background: #e9ece5; }
+    .map-layout { display: grid; grid-template-columns: 1.05fr .95fr; gap: 68px; align-items: center; }
+    .map-copy > p { max-width: 520px; color: var(--muted); }
+    .map-note { display: inline-flex; gap: 8px; align-items: center; margin-top: 8px; color: var(--muted); font-size: 11px; }
+    .map-note::before { content: ""; width: 18px; height: 1px; background: var(--coral); }
+    .map-area-list { margin-top: 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+    .area-choice {
+      padding: 16px 17px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      color: var(--ink);
+      background: rgba(255,255,255,.58);
+      font-weight: 800;
+      text-align: left;
+      cursor: pointer;
+      transition: background .2s ease, color .2s ease, transform .2s ease;
+    }
+    .area-choice span { color: var(--muted); font-size: 10px; }
+    .area-choice:hover, .area-choice.active { color: white; background: var(--pine); transform: translateY(-2px); }
+    .area-choice:hover span, .area-choice.active span { color: #c2d4ce; }
+    .map-board {
+      position: relative;
+      min-height: 570px;
+      border: 1px solid rgba(24,63,54,.13);
+      border-radius: 42% 42% 24px 24px / 28% 28% 24px 24px;
+      overflow: hidden;
+      background: linear-gradient(160deg, #bcd3d8 0%, #dce7e5 100%);
+      box-shadow: 0 24px 60px rgba(24,63,54,.11);
+    }
+    .map-board svg { position: absolute; inset: 8% 9%; width: 82%; height: 84%; filter: drop-shadow(0 12px 12px rgba(24,63,54,.12)); }
+    .map-hotspot {
+      position: absolute;
+      z-index: 3;
+      width: 24px;
+      height: 24px;
+      border: 6px solid white;
+      border-radius: 50%;
+      background: var(--coral);
+      box-shadow: 0 6px 18px rgba(22,37,33,.28);
+      cursor: pointer;
+      transition: transform .2s ease;
+    }
+    .map-hotspot:hover, .map-hotspot.active { transform: scale(1.28); }
+    .map-hotspot::after {
+      content: attr(data-label);
+      position: absolute;
+      left: 50%;
+      top: 26px;
+      padding: 5px 8px;
+      border-radius: 999px;
+      color: white;
+      background: rgba(22,37,33,.84);
+      font-size: 9px;
+      font-weight: 800;
+      white-space: nowrap;
+      transform: translateX(-50%);
+    }
+    .map-hotspot[data-area="北海道"] { top: 19%; right: 20%; }
+    .map-hotspot[data-area="東北"] { top: 43%; right: 38%; }
+    .map-hotspot[data-area="新潟"] { top: 57%; right: 47%; }
+    .map-hotspot[data-area="長野"] { top: 65%; right: 50%; }
+    .map-hotspot[data-area="關東・山梨"] { top: 70%; right: 38%; }
+    .map-hotspot[data-area="岐阜・滋賀"] { top: 73%; right: 59%; }
+
+    #finderDialog { width: min(720px, calc(100% - 28px)); }
+    .quiz-head { position: relative; padding: 30px 34px; color: white; background: var(--pine); }
+    .quiz-head small { color: #b9d0c9; font-size: 10px; font-weight: 800; letter-spacing: .14em; }
+    .quiz-head h2 { margin: 5px 56px 0 0; font-family: "Yu Mincho", serif; font-size: 30px; font-weight: 600; }
+    .quiz-head .dialog-close { top: 22px; }
+    .quiz-body { padding: 30px 34px 36px; }
+    .quiz-progress { height: 4px; margin-bottom: 30px; overflow: hidden; border-radius: 999px; background: var(--paper-2); }
+    .quiz-progress span { display: block; width: 33.33%; height: 100%; border-radius: inherit; background: var(--coral); transition: width .25s ease; }
+    .quiz-step { display: none; }
+    .quiz-step.active { display: block; }
+    .quiz-step h3 { margin: 0 0 6px; font-family: "Yu Mincho", serif; font-size: 25px; font-weight: 600; }
+    .quiz-step > p { margin: 0 0 22px; color: var(--muted); font-size: 13px; }
+    .quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .quiz-option {
+      min-height: 76px;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      color: var(--ink);
+      background: rgba(255,255,255,.68);
+      text-align: left;
+      cursor: pointer;
+      transition: border .2s ease, background .2s ease, transform .2s ease;
+    }
+    .quiz-option:hover, .quiz-option.selected { border-color: var(--pine); background: #e5ebe7; transform: translateY(-2px); }
+    .quiz-option strong { font-size: 14px; }
+    .quiz-option span { margin-top: 3px; color: var(--muted); font-size: 10px; }
+    .quiz-nav { margin-top: 28px; display: flex; justify-content: space-between; gap: 10px; }
+    .quiz-nav button { min-width: 112px; }
+    .quiz-result-list { display: grid; gap: 10px; }
+    .quiz-result {
+      padding: 16px;
+      display: grid;
+      grid-template-columns: 42px 1fr auto;
+      gap: 13px;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255,255,255,.68);
+    }
+    .quiz-result > span { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 50%; color: white; background: var(--pine); font-family: "Yu Mincho", serif; }
+    .quiz-result strong { display: block; font-size: 14px; }
+    .quiz-result small { color: var(--muted); }
+    .quiz-result button { border: 0; color: var(--coral); background: transparent; font-size: 12px; font-weight: 900; cursor: pointer; }
+
+    .filter-panel {
+      display: grid;
+      grid-template-columns: 1.55fr repeat(3, 1fr) auto;
+      gap: 10px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(255,255,255,.58);
+    }
+    .field { position: relative; }
+    .field label {
+      position: absolute;
+      top: 8px;
+      left: 14px;
+      z-index: 2;
+      color: var(--muted);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      pointer-events: none;
+    }
+    .field input, .field select {
+      width: 100%;
+      min-height: 58px;
+      padding: 23px 38px 7px 14px;
+      border: 0;
+      border-radius: 13px;
+      outline: 0;
+      color: var(--ink);
+      background: var(--snow);
+      font-size: 14px;
+      font-weight: 700;
+      appearance: none;
+    }
+    .field input:focus, .field select:focus { box-shadow: 0 0 0 3px rgba(115, 155, 181, .24); }
+    .field-select::after {
+      content: "⌄";
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      color: var(--muted);
+      transform: translateY(-35%);
+      pointer-events: none;
+    }
+    .reset-button {
+      min-width: 54px;
+      border: 0;
+      border-radius: 13px;
+      background: var(--paper-2);
+      color: var(--muted);
+      cursor: pointer;
+      transition: background .2s ease, color .2s ease;
+    }
+    .reset-button:hover, .reset-button:focus-visible { color: var(--ink); background: #dedbd2; outline: none; }
+
+    .result-line {
+      min-height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .result-line strong { color: var(--ink); }
+    .data-scope {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--pine-2);
+      font-weight: 800;
+    }
+    .data-scope::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #62a98f;
+      box-shadow: 0 0 0 4px rgba(98,169,143,.14);
+    }
+
+    .resort-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 20px;
+    }
+    .resort-card {
+      grid-column: span 4;
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: rgba(255,255,255,.56);
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+    .resort-card:nth-child(1), .resort-card:nth-child(2) { grid-column: span 6; }
+    .resort-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(24,63,54,.28);
+      box-shadow: var(--shadow);
+    }
+    .card-visual {
+      position: relative;
+      height: 220px;
+      overflow: hidden;
+      background: linear-gradient(155deg, var(--tone-a), var(--tone-b));
+    }
+    .card-visual::before, .card-visual::after {
+      content: "";
+      position: absolute;
+      left: -8%;
+      right: -8%;
+      bottom: -2px;
+      height: 68%;
+      background: rgba(255,255,255,.88);
+      clip-path: polygon(0 86%, 20% 62%, 34% 70%, 56% 13%, 70% 53%, 82% 35%, 100% 84%, 100% 100%, 0 100%);
+    }
+    .card-visual::after {
+      bottom: -8px;
+      height: 48%;
+      background: rgba(24,63,54,.82);
+      clip-path: polygon(0 90%, 21% 52%, 34% 76%, 52% 39%, 70% 68%, 82% 30%, 100% 85%, 100% 100%, 0 100%);
+    }
+    .card-number {
+      position: absolute;
+      top: 16px;
+      left: 18px;
+      z-index: 2;
+      color: rgba(255,255,255,.92);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .15em;
+    }
+    .card-region {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      z-index: 2;
+      padding: 7px 11px;
+      border: 1px solid rgba(255,255,255,.5);
+      border-radius: 999px;
+      color: white;
+      background: rgba(22,37,33,.14);
+      backdrop-filter: blur(8px);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .08em;
+    }
+    .card-body { padding: 24px; }
+    .card-kana { margin: 0 0 6px; color: var(--muted); font-size: 10px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+    .card-body h3 { margin: 0; font-family: "Yu Mincho", serif; font-size: 26px; font-weight: 600; line-height: 1.3; }
+    .card-body > p { min-height: 52px; margin: 14px 0 18px; color: var(--muted); font-size: 14px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .tag { padding: 5px 9px; border-radius: 999px; color: var(--pine-2); background: #e5ebe7; font-size: 10px; font-weight: 800; }
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+    }
+    .card-footer span { color: var(--muted); font-size: 11px; }
+    .card-tools { display: flex; flex-wrap: wrap; gap: 6px; }
+    .mini-action {
+      min-height: 34px;
+      padding: 6px 9px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      background: rgba(255,255,255,.55);
+      font-size: 10px;
+      font-weight: 900;
+      cursor: pointer;
+      transition: color .2s ease, background .2s ease, border-color .2s ease, transform .2s ease;
+    }
+    .mini-action:hover { transform: translateY(-1px); border-color: rgba(24,63,54,.38); color: var(--pine); }
+    .mini-action.active { border-color: var(--pine); color: white; background: var(--pine); }
+    .mini-action.favorite.active { border-color: var(--coral); background: var(--coral); }
+    .mini-action .action-symbol { color: inherit; font-size: 14px; line-height: 1; }
+    .detail-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 0;
+      border: 0;
+      color: var(--ink);
+      background: none;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .detail-button i {
+      width: 25px;
+      height: 25px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: white;
+      background: var(--coral);
+      font-style: normal;
+      transition: transform .2s ease;
+    }
+    .detail-button:hover i { transform: translateX(3px); }
+
+    .empty-state {
+      padding: 64px 24px;
+      grid-column: 1 / -1;
+      border: 1px dashed rgba(24,63,54,.3);
+      border-radius: var(--radius-md);
+      text-align: center;
+      background: rgba(255,255,255,.4);
+    }
+    .empty-state strong { display: block; margin-bottom: 8px; font-family: "Yu Mincho", serif; font-size: 24px; }
+    .empty-state p { margin: 0 0 18px; color: var(--muted); }
+
+    .about {
+      color: #f6f5ef;
+      background: var(--pine);
+    }
+    .about-inner {
+      width: var(--container);
+      margin: 0 auto;
+      padding: 110px 0;
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      gap: 100px;
+    }
+    .about .eyebrow { color: #aed2c6; }
+    .about h2 { max-width: 480px; }
+    .about-copy > p { margin: 0 0 36px; color: #bfd0ca; font-size: 17px; line-height: 1.9; }
+    .principles { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .principle { padding: 24px; border: 1px solid rgba(255,255,255,.14); border-radius: 18px; background: rgba(255,255,255,.04); }
+    .principle b { display: block; margin-bottom: 8px; color: white; font-size: 14px; }
+    .principle span { color: #aec1bb; font-size: 12px; }
+
+    .roadmap { width: var(--container); margin: 0 auto; padding: 110px 0 120px; }
+    .roadmap-head { display: flex; justify-content: space-between; gap: 30px; align-items: end; margin-bottom: 48px; }
+    .roadmap-head p { max-width: 440px; margin: 0; color: var(--muted); }
+    .roadmap-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .phase { min-height: 240px; padding: 28px; border: 1px solid var(--line); border-radius: 20px; background: rgba(255,255,255,.48); }
+    .phase.current { color: white; border-color: var(--pine); background: var(--pine); }
+    .phase-label { display: flex; justify-content: space-between; align-items: center; margin-bottom: 42px; color: var(--muted); font-size: 10px; font-weight: 800; letter-spacing: .12em; }
+    .current .phase-label { color: #bad0c9; }
+    .phase-label i { width: 8px; height: 8px; border-radius: 50%; background: #9ba5a2; }
+    .current .phase-label i { background: #e67b62; box-shadow: 0 0 0 5px rgba(230,123,98,.18); }
+    .phase h3 { margin: 0 0 12px; font-family: "Yu Mincho", serif; font-size: 24px; font-weight: 600; }
+    .phase p { margin: 0; color: var(--muted); font-size: 13px; }
+    .current p { color: #b9cbc5; }
+
+    footer { border-top: 1px solid var(--line); }
+    .footer-inner {
+      width: var(--container);
+      margin: 0 auto;
+      padding: 36px 0;
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+    .footer-inner strong { color: var(--ink); }
+
+    dialog {
+      width: min(840px, calc(100% - 28px));
+      max-height: min(860px, calc(100vh - 28px));
+      padding: 0;
+      overflow: auto;
+      border: 0;
+      border-radius: 26px;
+      color: var(--ink);
+      background: var(--paper);
+      box-shadow: 0 28px 100px rgba(5,18,15,.35);
+    }
+    dialog::backdrop { background: rgba(10,27,23,.66); backdrop-filter: blur(6px); }
+    .dialog-hero {
+      position: relative;
+      min-height: 260px;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: end;
+      overflow: hidden;
+      color: white;
+      background: linear-gradient(145deg, var(--dialog-a), var(--dialog-b));
+    }
+    .dialog-hero::after {
+      content: "";
+      position: absolute;
+      left: -8%; right: -8%; bottom: -30px;
+      height: 58%;
+      background: rgba(255,255,255,.18);
+      clip-path: polygon(0 100%, 17% 55%, 29% 75%, 48% 10%, 62% 57%, 75% 32%, 100% 88%, 100% 100%);
+    }
+    .dialog-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      z-index: 3;
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(255,255,255,.5);
+      border-radius: 50%;
+      color: white;
+      background: rgba(22,37,33,.18);
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+    }
+    .dialog-heading { position: relative; z-index: 2; }
+    .dialog-heading small { font-weight: 800; letter-spacing: .14em; }
+    .dialog-heading h2 { margin: 6px 0 0; font-family: "Yu Mincho", serif; font-size: clamp(34px, 6vw, 54px); font-weight: 500; line-height: 1.15; }
+    .dialog-content { padding: 34px 40px 42px; }
+    .dialog-intro { margin: 0 0 30px; color: #4d5c57; font-size: 17px; line-height: 1.85; }
+    .detail-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 30px; }
+    .detail-cell { padding: 18px; border-radius: 14px; background: rgba(255,255,255,.7); }
+    .detail-cell small { display: block; margin-bottom: 5px; color: var(--muted); font-size: 9px; font-weight: 800; letter-spacing: .1em; }
+    .detail-cell strong { font-size: 13px; }
+    .detail-note { padding: 20px; display: flex; gap: 13px; border: 1px solid rgba(221,104,79,.24); border-radius: 15px; background: rgba(221,104,79,.07); }
+    .detail-note svg { flex: 0 0 auto; color: var(--coral); }
+    .detail-note p { margin: 0; color: #62534f; font-size: 12px; }
+    .dialog-actions { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 10px; }
+    .button-primary, .button-secondary { padding: 13px 18px; text-decoration: none; font-size: 13px; }
+    button.button-primary:disabled { opacity: .38; cursor: not-allowed; transform: none; }
+    .button-secondary { border: 1px solid var(--line); border-radius: 12px; color: var(--ink); background: transparent; font-weight: 800; }
+    .button-secondary:hover { background: white; }
+
+    .detail-planner-action.active { color: white; border-color: var(--pine); background: var(--pine); }
+    .detail-planner-action.favorite.active { border-color: var(--coral); background: var(--coral); }
+
+    .panel-dialog { width: min(880px, calc(100% - 28px)); }
+    .panel-dialog-head {
+      position: sticky;
+      top: 0;
+      z-index: 4;
+      min-height: 116px;
+      padding: 27px 34px;
+      color: white;
+      background: var(--pine);
+    }
+    .panel-dialog-head small { color: #b9d0c9; font-size: 10px; font-weight: 800; letter-spacing: .14em; }
+    .panel-dialog-head h2 { margin: 4px 56px 0 0; font-family: "Yu Mincho", serif; font-size: 30px; font-weight: 600; line-height: 1.2; }
+    .panel-dialog-body { padding: 26px 34px 36px; }
+    .panel-intro { margin: 0 0 22px; color: var(--muted); font-size: 13px; }
+    .saved-list { display: grid; gap: 10px; }
+    .saved-row {
+      padding: 15px 16px;
+      display: grid;
+      grid-template-columns: 44px 1fr auto;
+      gap: 14px;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: rgba(255,255,255,.64);
+    }
+    .saved-row-number { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 50%; color: white; background: var(--pine); font-family: "Yu Mincho", serif; }
+    .saved-row strong { display: block; }
+    .saved-row small { color: var(--muted); }
+    .saved-row-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px; }
+    .saved-row-actions button { padding: 7px 10px; border: 1px solid var(--line); border-radius: 999px; color: var(--ink); background: transparent; font-size: 10px; font-weight: 900; cursor: pointer; }
+    .saved-row-actions button:hover { background: white; }
+    .saved-empty { padding: 54px 20px; border: 1px dashed rgba(24,63,54,.28); border-radius: 18px; text-align: center; }
+    .saved-empty strong { display: block; margin-bottom: 7px; font-family: "Yu Mincho", serif; font-size: 23px; }
+    .saved-empty p { margin: 0; color: var(--muted); font-size: 12px; }
+
+    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .compare-card, .compare-slot {
+      min-width: 0;
+      min-height: 430px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: rgba(255,255,255,.6);
+    }
+    .compare-card-number { color: var(--coral); font-size: 10px; font-weight: 900; letter-spacing: .13em; }
+    .compare-card h3 { margin: 8px 0 2px; font-family: "Yu Mincho", serif; font-size: 25px; font-weight: 600; line-height: 1.25; }
+    .compare-card > small { color: var(--muted); }
+    .compare-facts { margin: 24px 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+    .compare-fact { padding: 12px 0; display: grid; grid-template-columns: 70px 1fr; gap: 10px; border-bottom: 1px solid var(--line); font-size: 12px; }
+    .compare-fact span { color: var(--muted); }
+    .compare-fact b { font-weight: 800; }
+    .compare-card p { color: #53615d; font-size: 12px; }
+    .compare-card-actions { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .compare-card-actions a, .compare-card-actions button { padding: 9px 11px; border: 1px solid var(--line); border-radius: 10px; color: var(--ink); background: transparent; text-decoration: none; font-size: 10px; font-weight: 900; cursor: pointer; }
+    .compare-card-actions a { color: white; border-color: var(--pine); background: var(--pine); }
+    .compare-slot { display: grid; place-items: center; border-style: dashed; text-align: center; }
+    .compare-slot strong { display: block; margin-bottom: 7px; font-family: "Yu Mincho", serif; font-size: 22px; }
+    .compare-slot p { max-width: 240px; margin: 0; color: var(--muted); font-size: 12px; }
+
+    .planner-dock {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 120;
+      min-width: 300px;
+      padding: 9px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 18px;
+      color: white;
+      background: rgba(22,37,33,.94);
+      box-shadow: 0 18px 55px rgba(8,24,20,.28);
+      backdrop-filter: blur(14px);
+      transform: translateY(calc(100% + 32px));
+      opacity: 0;
+      pointer-events: none;
+      transition: transform .25s ease, opacity .25s ease;
+    }
+    .planner-dock.active { transform: translateY(0); opacity: 1; pointer-events: auto; }
+    .planner-dock button {
+      min-height: 42px;
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      border: 0;
+      border-radius: 11px;
+      color: white;
+      background: rgba(255,255,255,.09);
+      font-size: 11px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+    .planner-dock button:hover { background: rgba(255,255,255,.16); }
+    .planner-dock b { color: #f1a18f; font-size: 10px; }
+    .planner-dock-divider { width: 1px; height: 26px; background: rgba(255,255,255,.16); }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 24px;
+      z-index: 500;
+      padding: 11px 16px;
+      border-radius: 999px;
+      color: white;
+      background: var(--ink);
+      font-size: 12px;
+      font-weight: 700;
+      box-shadow: 0 10px 30px rgba(0,0,0,.2);
+      transform: translate(-50%, 24px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s ease, transform .2s ease;
+    }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+    .planner-dock.active + .toast { bottom: 86px; }
+
+    @media (max-width: 980px) {
+      .hero { min-height: auto; padding-top: 54px; grid-template-columns: 1fr; gap: 44px; }
+      .hero-copy { max-width: 780px; }
+      .hero-art { min-height: 440px; }
+      .manifesto-inner { grid-template-columns: 1.2fr repeat(3, .5fr); }
+      .filter-panel { grid-template-columns: 1fr 1fr; }
+      .field-search { grid-column: 1 / -1; }
+      .reset-button { min-height: 56px; }
+      .finder-card { gap: 30px; }
+      .map-layout { gap: 38px; }
+      .map-board { min-height: 500px; }
+      .resort-card, .resort-card:nth-child(1), .resort-card:nth-child(2) { grid-column: span 6; }
+      .about-inner { gap: 56px; }
+    }
+
+    @media (max-width: 720px) {
+      :root { --container: calc(100% - 28px); }
+      .nav-wrap { min-height: 68px; }
+      .menu-button { display: grid; }
+      .main-nav {
+        position: absolute;
+        top: 68px;
+        left: 14px;
+        right: 14px;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: rgba(250,249,244,.98);
+        box-shadow: var(--shadow);
+      }
+      .main-nav.open { display: flex; }
+      .main-nav a { padding: 12px 14px; }
+      .nav-tool { width: 100%; justify-content: space-between; border-radius: 12px; }
+      .hero { padding: 52px 0 40px; }
+      .hero h1 { font-size: clamp(46px, 15vw, 70px); }
+      .hero-search { align-items: stretch; flex-wrap: wrap; padding: 12px; }
+      .hero-search input { min-height: 40px; }
+      .hero-search button { width: 100%; }
+      .hero-art { min-height: 370px; border-radius: 42% 42% 22px 22px / 24% 24% 22px 22px; }
+      .sun { top: 46px; right: 38px; width: 58px; height: 58px; }
+      .manifesto-inner { grid-template-columns: repeat(3, 1fr); }
+      .manifesto-copy { grid-column: 1 / -1; padding: 28px 0; border-right: 0; border-bottom: 1px solid var(--line); }
+      .metric { padding: 24px 6px; }
+      .metric strong { font-size: 24px; }
+      .section-head, .roadmap-head { align-items: start; flex-direction: column; }
+      .finder, .explore, .roadmap { padding: 84px 0; }
+      .finder-card { min-height: auto; grid-template-columns: 1fr; gap: 34px; }
+      .finder-action { padding: 22px; }
+      .map-section { padding: 84px 0; }
+      .map-layout { grid-template-columns: 1fr; }
+      .map-board { min-height: 480px; order: -1; }
+      .filter-panel { grid-template-columns: 1fr; }
+      .field-search { grid-column: auto; }
+      .result-line { padding: 10px 0 14px; align-items: flex-start; flex-direction: column; gap: 4px; }
+      .resort-card, .resort-card:nth-child(1), .resort-card:nth-child(2) { grid-column: 1 / -1; }
+      .quiz-head { padding: 26px 22px; }
+      .quiz-body { padding: 26px 20px 30px; }
+      .quiz-options, .map-area-list { grid-template-columns: 1fr; }
+      .quiz-result { grid-template-columns: 38px 1fr; }
+      .quiz-result button { grid-column: 2; justify-self: start; padding: 0; }
+      .about-inner { padding: 84px 0; grid-template-columns: 1fr; gap: 42px; }
+      .principles { grid-template-columns: 1fr; }
+      .roadmap-list { grid-template-columns: 1fr; }
+      .phase { min-height: 210px; }
+      .footer-inner { flex-direction: column; }
+      .dialog-hero { min-height: 220px; padding: 28px; }
+      .dialog-content { padding: 26px 22px 32px; }
+      .detail-grid { grid-template-columns: 1fr; }
+      .card-footer { align-items: flex-end; }
+      .panel-dialog-head { padding: 24px 22px; }
+      .panel-dialog-body { padding: 22px 18px 28px; }
+      .saved-row { grid-template-columns: 40px 1fr; }
+      .saved-row-number { width: 40px; height: 40px; }
+      .saved-row-actions { grid-column: 2; justify-content: flex-start; }
+      .compare-grid { grid-template-columns: 1fr; }
+      .compare-card, .compare-slot { min-height: auto; }
+      .compare-slot { min-height: 180px; }
+      .planner-dock { left: 14px; right: 14px; bottom: 14px; min-width: 0; }
+      .planner-dock.active + .toast { bottom: 80px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#explore">跳到雪場清單</a>
+
+  <header class="site-header" id="siteHeader">
+    <div class="nav-wrap">
+      <a class="brand" href="#top" aria-label="Japan Snow Guide 首頁">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 18.5 9.2 8l3.2 5 2.3-3.6L21 18.5H3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="m7.8 10.4 1.5 2 1.2-1.1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <span>雪路 <small>JAPAN SNOW GUIDE</small></span>
+      </a>
+
+      <button class="menu-button" id="menuButton" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="開啟導覽選單">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+
+      <nav class="main-nav" id="mainNav" aria-label="主要導覽">
+        <a href="#top">首頁</a>
+        <a href="#finder">幫我找</a>
+        <a href="#map">地區地圖</a>
+        <a href="#explore">探索雪場</a>
+        <button class="nav-tool" id="openFavoritesNav" type="button" aria-label="開啟收藏清單">收藏 <b id="favoriteNavCount">0</b></button>
+        <a class="nav-cta" href="#about">資料說明</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Phase 03 · Plan with confidence</p>
+        <h1 id="hero-title">找到你的<br>下一座<span class="accent">雪山。</span></h1>
+        <p class="hero-lead">探索 25 座已核對的代表性雪場，收藏喜歡的山，並把兩座候選雪場放在一起比較。</p>
+
+        <form class="hero-search" id="heroSearchForm" role="search">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.7"/><path d="m16 16 4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+          <label class="sr-only" for="heroSearch">搜尋雪場</label>
+          <input id="heroSearch" type="search" placeholder="搜尋雪場、地區或特色" autocomplete="off">
+          <button type="submit">開始探索</button>
+        </form>
+
+        <button class="hero-inline-quiz" id="openFinderHero" type="button">不確定怎麼選？用 3 題幫我找 →</button>
+
+        <div class="hero-meta" aria-label="資料特色">
+          <span><i></i>繁體中文介面</span>
+          <span><i></i>官方來源入口</span>
+          <span><i></i>無即時狀態臆測</span>
+        </div>
+      </div>
+
+      <div class="hero-art" role="img" aria-label="冬日雪山與朝陽的極簡插畫">
+        <div class="sun"></div>
+        <div class="mountain"></div>
+        <div class="mountain-snow"></div>
+        <div class="snow-field"></div>
+        <div class="trail"></div>
+        <span class="tree tree-1"></span>
+        <span class="tree tree-2"></span>
+        <span class="tree tree-3"></span>
+        <div class="art-card">
+          <small>TRAVEL NOTE 01</small>
+          <strong>先選地形，<br>再看當日雪況。</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="manifesto" aria-label="資料範圍摘要">
+      <div class="manifesto-inner">
+        <div class="manifesto-copy">
+          <strong>透明資料，比看起來完整更重要。</strong>
+          <p>25 座正式資料皆保留官方入口；營業、雪況與票價一律回到各雪場官方頁面確認。</p>
+        </div>
+        <div class="metric"><strong>25</strong><span>已核對雪場</span></div>
+        <div class="metric"><strong>6</strong><span>探索地區</span></div>
+        <div class="metric"><strong>V3</strong><span>收藏與比較</span></div>
+      </div>
+    </section>
+
+    <section class="finder" id="finder" aria-labelledby="finder-title">
+      <div class="finder-card">
+        <div>
+          <p class="eyebrow">Quick finder · 3 questions</p>
+          <h2 id="finder-title">還沒有頭緒？<br>從旅程偏好開始。</h2>
+          <p>選擇滑行程度、想去的地區與這趟旅行最重視的體驗；系統會依目前資料給出三個探索起點。</p>
+        </div>
+        <div class="finder-action">
+          <strong>30 秒雪場配對</strong>
+          <p>不需要登入，不會儲存答案。推薦是規則式探索建議，不代表安全或即時雪況判斷。</p>
+          <button class="finder-start" id="openFinder" type="button">開始回答 3 題</button>
+          <span class="finder-caption">LEVEL · AREA · TRIP STYLE</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="map-section" id="map" aria-labelledby="map-title">
+      <div class="map-inner map-layout">
+        <div class="map-copy">
+          <p class="eyebrow">Interactive region map</p>
+          <h2 id="map-title">先選一片雪國，<br>再看看有哪些山。</h2>
+          <p>點選地圖標記或地區名稱，會直接帶你到相符雪場。這是探索用示意圖，不作為交通或地理導航使用。</p>
+          <span class="map-note">目前涵蓋 6 個雪場區域</span>
+          <div class="map-area-list" id="mapAreaList">
+            <button class="area-choice" type="button" data-area="北海道">北海道 <span>5 座</span></button>
+            <button class="area-choice" type="button" data-area="東北">東北 <span>5 座</span></button>
+            <button class="area-choice" type="button" data-area="長野">長野 <span>6 座</span></button>
+            <button class="area-choice" type="button" data-area="新潟">新潟 <span>5 座</span></button>
+            <button class="area-choice" type="button" data-area="關東・山梨">關東・山梨 <span>2 座</span></button>
+            <button class="area-choice" type="button" data-area="岐阜・滋賀">岐阜・滋賀 <span>2 座</span></button>
+          </div>
+        </div>
+        <div class="map-board" role="group" aria-label="日本滑雪地區示意地圖">
+          <svg viewBox="0 0 440 650" aria-hidden="true">
+            <path d="M285 31c39-17 93 7 103 43 8 30-17 64-51 70-29 5-69-12-77-42-8-27 1-58 25-71Z" fill="#f8f8f4"/>
+            <path d="M267 153c21 9 31 31 27 54-4 26-1 47 12 72 9 17 2 35-10 48-17 18-19 40-9 65 7 18-3 36-18 48-17 14-30 36-36 61-4 18-14 29-29 37l-22-25c17-17 27-36 28-59 1-24 14-45 33-60 14-11 17-26 8-45-13-27-13-54 1-79 12-21 9-39-5-58l20-59Z" fill="#f8f8f4"/>
+            <path d="M189 505c-21 8-42 23-59 44-13 16-30 25-51 31l-24-19c19-12 33-26 44-44 17-27 45-42 77-44l13 32Z" fill="#f8f8f4"/>
+            <path d="M43 573c13 4 22 15 21 28-2 15-15 26-30 23-14-3-23-18-17-31 5-12 14-22 26-20Z" fill="#f8f8f4"/>
+          </svg>
+          <button class="map-hotspot" type="button" data-area="北海道" data-label="北海道" aria-label="查看北海道雪場"></button>
+          <button class="map-hotspot" type="button" data-area="東北" data-label="東北" aria-label="查看東北雪場"></button>
+          <button class="map-hotspot" type="button" data-area="新潟" data-label="新潟" aria-label="查看新潟雪場"></button>
+          <button class="map-hotspot" type="button" data-area="長野" data-label="長野" aria-label="查看長野雪場"></button>
+          <button class="map-hotspot" type="button" data-area="關東・山梨" data-label="關東・山梨" aria-label="查看關東與山梨雪場"></button>
+          <button class="map-hotspot" type="button" data-area="岐阜・滋賀" data-label="岐阜・滋賀" aria-label="查看岐阜與滋賀雪場"></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="explore" id="explore" aria-labelledby="explore-title">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Explore resorts</p>
+          <h2 id="explore-title">依你的方式，<br>縮小選擇。</h2>
+        </div>
+        <p>V3 已完成 25 座代表性資料。按下「收藏」建立清單，或選擇「比較」並排查看兩座候選雪場。</p>
+      </div>
+
+      <div class="filter-panel" aria-label="雪場篩選">
+        <div class="field field-search">
+          <label for="searchInput">關鍵字</label>
+          <input id="searchInput" type="search" placeholder="雪場、地區、特色…" autocomplete="off">
+        </div>
+        <div class="field field-select">
+          <label for="regionFilter">地區</label>
+          <select id="regionFilter"><option value="all">全部地區</option></select>
+        </div>
+        <div class="field field-select">
+          <label for="levelFilter">程度</label>
+          <select id="levelFilter">
+            <option value="all">全部程度</option>
+            <option value="beginner">初階</option>
+            <option value="intermediate">中階</option>
+            <option value="advanced">進階</option>
+          </select>
+        </div>
+        <div class="field field-select">
+          <label for="styleFilter">滑行方式</label>
+          <select id="styleFilter">
+            <option value="all">單板與雙板</option>
+            <option value="snowboard">單板</option>
+            <option value="ski">雙板</option>
+          </select>
+        </div>
+        <button class="reset-button" id="resetFilters" type="button" title="清除所有篩選" aria-label="清除所有篩選">↺</button>
+      </div>
+
+      <div class="result-line" aria-live="polite">
+        <span id="resultCount">顯示 25 座雪場</span>
+        <span class="data-scope">V3 正式範圍 · 非雪場排行</span>
+      </div>
+
+      <div class="resort-grid" id="resortGrid"></div>
+    </section>
+
+    <section class="about" id="about" aria-labelledby="about-title">
+      <div class="about-inner">
+        <div>
+          <p class="eyebrow">About the guide</p>
+          <h2 id="about-title">幫你開始規劃，<br>不替官方發言。</h2>
+        </div>
+        <div class="about-copy">
+          <p>Japan Snow Guide 是一個探索入口。分類標籤協助你建立初步方向，但出發前仍應以雪場官方網站公布的營業日、雪況、纜車狀態、票價與安全公告為準。</p>
+          <div class="principles">
+            <div class="principle"><b>來源可追溯</b><span>每筆資料附上官方資訊入口。</span></div>
+            <div class="principle"><b>易變資訊不硬填</b><span>不顯示未同步的即時雪深與營業狀態。</span></div>
+            <div class="principle"><b>分類是探索起點</b><span>程度標籤代表雪場含該級別雪道，不等於個人安全建議。</span></div>
+            <div class="principle"><b>結構可持續擴充</b><span>後續可加入更多雪場與進階工具。</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="roadmap" id="roadmap" aria-labelledby="roadmap-title">
+      <div class="roadmap-head">
+        <div>
+          <p class="eyebrow">Product roadmap</p>
+          <h2 id="roadmap-title">保留真實的<br>迭代痕跡。</h2>
+        </div>
+        <p>V1 與 V2 都已各自封存；V3 完成正式資料範圍，並加入能實際保存與比較的規劃工具。</p>
+      </div>
+      <div class="roadmap-list">
+        <article class="phase">
+          <div class="phase-label"><span>V1 · 已完成</span><i></i></div>
+          <h3>探索基本骨架</h3>
+          <p>首頁、搜尋、三種篩選、雪場卡片與詳細資訊。</p>
+        </article>
+        <article class="phase">
+          <div class="phase-label"><span>V2 · 已完成</span><i></i></div>
+          <h3>推薦問答與地圖</h3>
+          <p>三題偏好配對、互動地區地圖，以及 13 座跨地區雪場資料。</p>
+        </article>
+        <article class="phase current">
+          <div class="phase-label"><span>V3 · 現在</span><i></i></div>
+          <h3>收藏與雙場比較</h3>
+          <p>25 座正式資料、瀏覽器收藏，以及最多兩座雪場的並排比較。</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span><strong>Japan Snow Guide</strong> · Phase 03 Prototype</span>
+      <span>資料為規劃參考，出發前請查閱雪場官方公告。</span>
+    </div>
+  </footer>
+
+  <dialog id="finderDialog" aria-labelledby="quizTitle">
+    <div class="quiz-head">
+      <small>PERSONAL SNOW FINDER</small>
+      <h2 id="quizTitle">用三個選擇，找到探索起點</h2>
+      <button class="dialog-close" id="finderClose" type="button" aria-label="關閉推薦問答">×</button>
+    </div>
+    <div class="quiz-body">
+      <div class="quiz-progress" aria-hidden="true"><span id="quizProgress"></span></div>
+
+      <section class="quiz-step active" data-step="1">
+        <h3>你的滑行程度是？</h3>
+        <p>請選最接近目前狀況的選項。</p>
+        <div class="quiz-options">
+          <button class="quiz-option" type="button" data-key="level" data-value="beginner"><strong>初階</strong><span>第一次或仍在建立轉彎信心</span></button>
+          <button class="quiz-option" type="button" data-key="level" data-value="intermediate"><strong>中階</strong><span>能控制速度，想探索更多雪道</span></button>
+          <button class="quiz-option" type="button" data-key="level" data-value="advanced"><strong>進階</strong><span>偏好挑戰地形與非壓雪體驗</span></button>
+          <button class="quiz-option" type="button" data-key="level" data-value="all"><strong>同行者程度不同</strong><span>需要兼顧多種級別</span></button>
+        </div>
+      </section>
+
+      <section class="quiz-step" data-step="2">
+        <h3>這次想先看哪個地區？</h3>
+        <p>不確定也沒關係，可以交給其他偏好決定。</p>
+        <div class="quiz-options">
+          <button class="quiz-option" type="button" data-key="area" data-value="北海道"><strong>北海道</strong><span>二世谷、留壽都、富良野、札幌手稻</span></button>
+          <button class="quiz-option" type="button" data-key="area" data-value="東北"><strong>東北</strong><span>藏王、安比、夏油高原</span></button>
+          <button class="quiz-option" type="button" data-key="area" data-value="長野"><strong>長野</strong><span>白馬、野澤溫泉、志賀高原</span></button>
+          <button class="quiz-option" type="button" data-key="area" data-value="新潟"><strong>新潟</strong><span>苗場、GALA 湯澤、妙高杉之原</span></button>
+          <button class="quiz-option" type="button" data-key="area" data-value="關東・山梨"><strong>關東・山梨</strong><span>丸沼高原、富士天</span></button>
+          <button class="quiz-option" type="button" data-key="area" data-value="岐阜・滋賀"><strong>岐阜・滋賀</strong><span>高鷲、奧伊吹</span></button>
+          <button class="quiz-option" type="button" data-key="area" data-value="all"><strong>都可以</strong><span>依旅程體驗排序</span></button>
+        </div>
+      </section>
+
+      <section class="quiz-step" data-step="3">
+        <h3>這趟旅程最重視什麼？</h3>
+        <p>推薦會優先依這個偏好排序。</p>
+        <div class="quiz-options">
+          <button class="quiz-option" type="button" data-key="priority" data-value="powder"><strong>粉雪與自然地形</strong><span>想把滑行感受放在第一位</span></button>
+          <button class="quiz-option" type="button" data-key="priority" data-value="family"><strong>初學與同行友善</strong><span>希望不同程度都能安排</span></button>
+          <button class="quiz-option" type="button" data-key="priority" data-value="culture"><strong>溫泉與在地文化</strong><span>滑雪之外也想感受旅程</span></button>
+          <button class="quiz-option" type="button" data-key="priority" data-value="access"><strong>交通與短程安排</strong><span>重視移動效率與一日行程</span></button>
+          <button class="quiz-option" type="button" data-key="priority" data-value="variety"><strong>多樣地形與選擇</strong><span>想在同一區域探索更多可能</span></button>
+        </div>
+      </section>
+
+      <section class="quiz-step" data-step="4">
+        <h3>你的三個探索起點</h3>
+        <p>依回答與目前 25 座資料配對；請再查看官方雪道與當日資訊。</p>
+        <div class="quiz-result-list" id="quizResults"></div>
+      </section>
+
+      <div class="quiz-nav">
+        <button class="button-secondary" id="quizBack" type="button" hidden>上一步</button>
+        <button class="button-primary" id="quizNext" type="button" disabled>下一步</button>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="detailDialog" aria-labelledby="dialogTitle">
+    <div class="dialog-hero" id="dialogHero">
+      <button class="dialog-close" id="dialogClose" type="button" aria-label="關閉詳細資訊">×</button>
+      <div class="dialog-heading">
+        <small id="dialogRegion"></small>
+        <h2 id="dialogTitle"></h2>
+      </div>
+    </div>
+    <div class="dialog-content">
+      <p class="dialog-intro" id="dialogIntro"></p>
+      <div class="detail-grid">
+        <div class="detail-cell"><small>所在地區</small><strong id="dialogLocation"></strong></div>
+        <div class="detail-cell"><small>程度範圍</small><strong id="dialogLevels"></strong></div>
+        <div class="detail-cell"><small>滑行方式</small><strong id="dialogStyles"></strong></div>
+      </div>
+      <div class="detail-note">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M12 10v6M12 7.2v.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <p>本頁不顯示即時營業、雪深、票價或纜車狀態。這些資訊會隨日期與天候變動，請在出發前至官方網站再次確認。</p>
+      </div>
+      <div class="dialog-actions">
+        <a class="button-primary" id="officialLink" href="#" target="_blank" rel="noopener noreferrer">前往官方網站 ↗</a>
+        <button class="button-secondary detail-planner-action favorite" id="detailFavorite" type="button">♡ 加入收藏</button>
+        <button class="button-secondary detail-planner-action" id="detailCompare" type="button">⇄ 加入比較</button>
+        <button class="button-secondary" id="copyNameButton" type="button">複製雪場名稱</button>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="panel-dialog" id="favoritesDialog" aria-labelledby="favoritesTitle">
+    <div class="panel-dialog-head">
+      <small>MY SNOW LIST</small>
+      <h2 id="favoritesTitle">我的收藏雪場</h2>
+      <button class="dialog-close" id="favoritesClose" type="button" aria-label="關閉收藏清單">×</button>
+    </div>
+    <div class="panel-dialog-body">
+      <p class="panel-intro">收藏會保存在這個瀏覽器中；不需登入，也不會上傳到伺服器。</p>
+      <div class="saved-list" id="favoritesList"></div>
+    </div>
+  </dialog>
+
+  <dialog class="panel-dialog" id="compareDialog" aria-labelledby="compareTitle">
+    <div class="panel-dialog-head">
+      <small>SIDE-BY-SIDE</small>
+      <h2 id="compareTitle">雙場比較</h2>
+      <button class="dialog-close" id="compareClose" type="button" aria-label="關閉雪場比較">×</button>
+    </div>
+    <div class="panel-dialog-body">
+      <p class="panel-intro">只比較相對穩定的規劃資料；營業狀態、雪況與票價仍請查看官方網站。</p>
+      <div class="compare-grid" id="compareGrid"></div>
+    </div>
+  </dialog>
+
+  <aside class="planner-dock" id="plannerDock" aria-label="雪場規劃工具">
+    <button id="openFavorites" type="button">♡ 收藏 <b id="favoriteCount">0</b></button>
+    <span class="planner-dock-divider" aria-hidden="true"></span>
+    <button id="openCompare" type="button">⇄ 比較 <b id="compareCount">0 / 2</b></button>
+  </aside>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">已複製雪場名稱</div>
+
+  <script>
+    const resorts = [
+      {
+        id: "niseko-united", name: "二世谷聯合雪場", english: "Niseko United",
+        area: "北海道", region: "北海道", location: "北海道二世谷地區",
+        levels: ["beginner", "intermediate", "advanced"], styles: ["ski", "snowboard"],
+        vibes: ["powder", "variety"], tags: ["四區域聯合", "多樣地形", "林間景觀"],
+        summary: "由同一座山上的四個雪場區域組成，地形選擇豐富。",
+        detail: "官方介紹指出，二世谷聯合雪場由安努普利山上的四個雪場區域組成，並提供適合不同程度雙板與單板滑雪者的多樣地形。",
+        official: "https://www.niseko.ne.jp/en/niseko/", colors: ["#87aeb9", "#456e74"]
+      },
+      {
+        id: "rusutsu", name: "留壽都度假村", english: "Rusutsu Resort",
+        area: "北海道", region: "北海道", location: "北海道留壽都村",
+        levels: ["beginner", "intermediate", "advanced"], styles: ["ski", "snowboard"],
+        vibes: ["family", "variety", "powder"], tags: ["三座山峰", "寬闊緩坡", "多元地形"],
+        summary: "跨越三座山峰，從寬闊緩坡到具挑戰性的路線皆有涵蓋。",
+        detail: "官方冬季介紹將雪場分為 West Mt.、East Mt. 與 Mt. Isola 三座山峰，地形從適合入門的寬闊緩坡延伸至進階路線。",
+        official: "https://rusutsu.com/en/rusutsu-in-winter/", colors: ["#7996ad", "#40566f"]
+      },
+      {
+        id: "furano", name: "富良野滑雪場", english: "Furano Ski Resort",
+        area: "北海道", region: "北海道", location: "北海道富良野市",
+        levels: ["beginner", "intermediate", "advanced"], styles: ["ski", "snowboard"],
+        vibes: ["powder", "scenery", "family"], tags: ["寬闊雪景", "雪上活動", "度假設施"],
+        summary: "位於北海道中央，以開闊景觀、雪場與度假設施的整合為特色。",
+        detail: "官方雪場資訊介紹富良野的開闊雪景、滑雪區與多種雪上活動；當季纜車、雪道及安全資訊請依官方公告確認。",
+        official: "https://www.princehotels.com/en/ski/furano/", colors: ["#91adb4", "#54727a"]
+      },
+      {
+        id: "sapporo-teine", name: "札幌手稻滑雪場", english: "Sapporo Teine",
+        area: "北海道", region: "北海道", location: "北海道札幌市",
+        levels: ["beginner", "intermediate", "advanced"], styles: ["ski", "snowboard"],
+        vibes: ["access", "family", "variety"], tags: ["札幌近郊", "多級雪道", "奧運場地"],
+        summary: "鄰近札幌市區，官方介紹涵蓋初學至進階的多樣雪道。",
+        detail: "官方網站將札幌手稻定位為鄰近札幌市區的雪場，並說明雪道可涵蓋初學者到進階者；即時營運仍以官方頁面為準。",
+        official: "https://sapporo-teine.com/snow/lang/en/", colors: ["#8ca7b7", "#4a6575"]
+      },
+      {
+        id: "zao-onsen", name: "藏王溫泉滑雪場", english: "Zao Onsen Ski Resort",
+        area: "東北", region: "山形", location: "山形縣山形市",
+        levels: ["beginner", "intermediate", "advanced"], styles: ["ski", "snowboard"],
+        vibes: ["culture", "scenery"], tags: ["樹冰景觀", "溫泉地區", "纜車資訊"],
+        summary: "以冬季樹冰景觀聞名，滑雪與單板資訊可由官方入口確認。",
+        detail: "官方冬季頁面介紹藏王的樹冰景觀，並提供 Ski／Snowboard 與纜車相關資訊；實際可滑行範圍與狀態仍以當日公告為準。",
+        official: "https://www.zaoropeway.co.jp/winter/en.php", colors: ["#829b92", "#46665c"]
+      },
+      {
+        id: "appi-kogen", name: "安比高原滑雪場", english: "APPI Kogen",
+        area: "東北", region: "岩手", location: "岩手縣八幡平市",
+        levels: ["beginner", "intermediate", "advanced"], styles: ["ski", "snowboard"],
+        vibes: ["family", "variety"], tags: ["北東北", "滑進滑出住宿", "雪上活動"],
+        summary: "位於北東北的山岳度假區，結合雪場、住宿與雪上活動。",
+        detail: "官方介紹安比高原位於北東北，並提供雪道、雪況、租借與 Ski／Snowboard School 等規劃入口；實際開放內容需查看當季公告。",
+        official: "https://www.appi.co.jp/en/", colors: ["#8ca69d", "#526f66"]
+      },
+      {
+        id: "geto-kogen", name: "夏油高原滑雪場", english: "Geto Kogen",
+        area: "東北", region: "岩手", location: "岩手縣北上市",
+        levels: ["beginner", "intermediate", "advanced"], styles: ["ski", "snowboard"],
+        vibes: ["powder", "culture"], tags: ["東北山區", "溫泉設施", "國際雪校"],
+        summary: "位於岩手山區，官方冬季網站整合雪場服務、雪校與溫泉資訊。",
+        detail: "官方冬季頁面提供雪場服務與國際雪校資訊，設施頁亦列有夏油高原溫泉；雪道與營運狀態請在造訪前確認。",
+        official: "https://www.getokogen.com/winter_en/", colors: ["#7e9ca3", "#48676f"]
+      },
+      {
+        id: "happo-one", name: "白馬八方尾根", english: "Hakuba Happo-one",
+        area: "長野", region: "長野", location: "長野縣白馬村",
+        levels: ["beginner", "intermediate", "advanced"], styles: ["ski", "snowboard"],
+        vibes: ["variety", "scenery"], tags: ["北阿爾卑斯景觀", "多級雪道", "白馬地區"],
+        summary: "以北阿爾卑斯山景與涵蓋各級別的雪道組合為特色。",
+        detail: "官方山岳資訊列出初、中、進階雪道，並介紹北阿爾卑斯山景；適合想在白馬地區探索多種雪道的人先納入清單。",
+        official: "https://www.happo-one.jp/en/gelande/", colors: ["#9cb3bf", "#667f8d"]
+      },
+      {
+        id: "nozawa-onsen", name: "野澤溫泉滑雪場", english: "Nozawa Onsen Snow Resort",
+        area: "長野", region: "長野", location: "長野縣野澤溫泉村",
+        levels: ["beginner", "intermediate", "advanced"], styles: ["ski", "snowboard"],
+        vibes: ["culture", "variety"], tags: ["溫泉村", "多級雪道", "雪場地圖"],
+        summary: "以溫泉村為旅程背景，可由官方雪道圖規劃不同程度路線。",
+        detail: "這筆資料採用官方雪場名稱、所在地與官方雪道圖所示的分級用途；當季開放區域與設施狀態請直接查看官方公告。",
+        official: "https://en.nozawaski.com/", colors: ["#b39d8b", "#806a5d"]
+      },
+      {
+        id: "shiga-kogen", name: "志賀高原山岳度假區", english: "Shiga Kogen Mountain Resort",
+        area: "長野", region: "長野", location: "長野縣山之內町",
+        levels: ["beginner", "intermediate", "advanced"], styles: ["ski", "snowboard"],
+        vibes: ["variety", "family", "scenery"], tags: ["多區域雪場", "區域纜車圖", "山岳景觀"],
+        summary: "由多個雪場區域構成，可利用官方區域圖規劃不同滑行路線。",
+        detail: "官方網站提供依區域整理的纜車圖、雪票、安全與交通資訊；由於範圍廣，出發前應依當日開放狀態規劃。",
+        official: "https://shigakogen-ski.or.jp/english/index.php", colors: ["#98a98f", "#5e7555"]
+      },
+      {
+        id: "naeba", name: "苗場滑雪場", english: "Naeba Ski Resort",
+        area: "新潟", region: "新潟", location: "新潟縣湯澤町",
+        levels: ["beginner", "intermediate", "advanced"], styles: ["ski", "snowboard"],
+        vibes: ["access", "family", "variety"], tags: ["度假飯店", "多級雪道", "Mt. Naeba"],
+        summary: "雪場與大型度假飯店相連，官方介紹兼具家庭與進階路線。",
+        detail: "官方頁面說明苗場設有兒童與初學路線、進階雪道及地形公園，並可與鄰近神樂地區串聯；當季連結狀況需另行確認。",
+        official: "https://www.princehotels.com/en/ski/naeba/", colors: ["#a58f96", "#735963"]
+      },
+      {
+        id: "gala-yuzawa", name: "GALA 湯澤滑雪場", english: "GALA Yuzawa",
+        area: "新潟", region: "新潟", location: "新潟縣湯澤町",
+        levels: ["beginner", "intermediate", "advanced"], styles: ["ski", "snowboard"],
+        vibes: ["access", "family"], tags: ["湯澤地區", "鐵路行程", "雪具租借"],
+        summary: "適合納入東京出發的短程雪旅，官方頁面整合票券與雪場服務。",
+        detail: "官方網站以東京至湯澤的鐵路行程為主要特色之一，並提供滑雪、單板、纜車票與設施資訊；實際班次與營運請另行核對。",
+        official: "https://gala.co.jp/en/winter/", colors: ["#aa9ba8", "#735f72"]
+      },
+      {
+        id: "myoko-suginohara", name: "妙高杉之原滑雪場", english: "Myoko Suginohara",
+        area: "新潟", region: "新潟", location: "新潟縣妙高市",
+        levels: ["beginner", "intermediate", "advanced"], styles: ["ski", "snowboard"],
+        vibes: ["powder", "variety", "scenery"], tags: ["妙高地區", "多樣雪道", "野尻湖景觀"],
+        summary: "位於妙高地區，官方介紹多樣雪道、地形公園與山湖景觀。",
+        detail: "官方雪場頁面列出初、中、進階雪道，並介紹野尻湖與周邊山景；雪道開放及租借服務請依當季資訊確認。",
+        official: "https://www.princehotels.com/en/ski/myoko_kogen/", colors: ["#809b91", "#4d6a60"]
+      },
+      {
+        id: "kiroro", name: "喜樂樂雪世界", english: "Kiroro Snow World",
+        area: "北海道", region: "北海道", location: "北海道赤井川村",
+        levels: ["beginner", "intermediate", "advanced"], styles: ["ski", "snowboard"],
+        vibes: ["powder", "family", "variety"], tags: ["朝里與長峰", "多級雪道", "雪上活動"],
+        summary: "跨越朝里與長峰兩座山區，官方雪道資訊涵蓋各種程度。",
+        detail: "官方雪道指南將喜樂樂雪世界分布於朝里與長峰兩座山區，並列出初、中、進階路線；實際開放與纜車狀態請查看當日公告。",
+        official: "https://www.kiroro.co.jp/guide_map/", colors: ["#7f9faf", "#405d6e"]
+      },
+      {
+        id: "hakkoda", name: "八甲田滑雪區", english: "Hakkoda Ropeway",
+        area: "東北", region: "青森", location: "青森縣青森市",
+        levels: ["intermediate", "advanced"], styles: ["ski", "snowboard"],
+        vibes: ["powder", "scenery"], tags: ["八甲田纜車", "樹冰景觀", "山岳雪地"],
+        summary: "以八甲田纜車與冬季樹冰景觀為核心的山岳雪地體驗。",
+        detail: "八甲田纜車官方網站提供冬季營運、山頂天候與交通入口。此區偏向山岳環境，行程前應依官方公告及自身能力確認安全條件。",
+        official: "https://hakkoda-ropeway.jp/en/", colors: ["#8aa3aa", "#4d6870"]
+      },
+      {
+        id: "nekoma-mountain", name: "星野度假村 NEKOMA Mountain", english: "Hoshino Resorts NEKOMA Mountain",
+        area: "東北", region: "福島", location: "福島縣磐梯地區",
+        levels: ["beginner", "intermediate", "advanced"], styles: ["ski", "snowboard"],
+        vibes: ["powder", "variety", "family"], tags: ["南北兩區", "多樣雪道", "地形公園"],
+        summary: "南北兩區相連，從緩坡、粉雪到地形公園都有探索空間。",
+        detail: "官方介紹指出 NEKOMA Mountain 由南北兩區構成，雪道從初學緩坡延伸至粉雪、陡坡與地形公園；開放區域依當日公告為準。",
+        official: "https://en.nekoma.co.jp/englp/", colors: ["#80998e", "#3f6358"]
+      },
+      {
+        id: "hakuba-goryu", name: "白馬五龍滑雪場", english: "Hakuba Goryu Snow Resort",
+        area: "長野", region: "長野", location: "長野縣白馬村",
+        levels: ["beginner", "intermediate", "advanced"], styles: ["ski", "snowboard"],
+        vibes: ["family", "variety", "scenery"], tags: ["三大區域", "白馬山景", "基地設施"],
+        summary: "由多個滑行區域與完整基地設施構成，並可銜接白馬 47。",
+        detail: "官方網站提供 Alps Daira、Toomi、Iimori 等區域資訊、雪道圖與基地設施介紹；與白馬 47 的當季連通情況請查官方公告。",
+        official: "https://www.hakubaescal.com/winter-en/", colors: ["#8ea8b7", "#526d7b"]
+      },
+      {
+        id: "hakuba-47", name: "白馬 47 冬季運動公園", english: "Hakuba47 Mountain Resort",
+        area: "長野", region: "長野", location: "長野縣白馬村",
+        levels: ["beginner", "intermediate", "advanced"], styles: ["ski", "snowboard"],
+        vibes: ["variety", "powder"], tags: ["地形公園", "林間滑行區", "銜接五龍"],
+        summary: "兼具中站初學區、中級雪道、進階地形與地形公園。",
+        detail: "官方資訊介紹中站初學區、寬闊中級雪道、饅頭雪坡、林間滑行區與地形公園，並可與白馬五龍銜接；安全規則須以現場公告為準。",
+        official: "https://hakuba47.co.jp/en/", colors: ["#7899ad", "#405f73"]
+      },
+      {
+        id: "tsugaike", name: "白馬栂池高原滑雪場", english: "Tsugaike Mountain Resort",
+        area: "長野", region: "長野", location: "長野縣小谷村",
+        levels: ["beginner", "intermediate", "advanced"], styles: ["ski", "snowboard"],
+        vibes: ["family", "powder", "variety"], tags: ["寬闊雪坡", "粉雪區域", "雪上活動"],
+        summary: "從寬闊雪坡、粉雪區域到雪上活動，適合不同旅伴規劃。",
+        detail: "官方介紹將栂池定位為白馬谷的大型雪場之一，提供初學至進階路線、粉雪區、雪地公園與非滑雪活動；請依當季公告確認內容。",
+        official: "https://www.tsugaike.gr.jp/snow", colors: ["#9aaeb8", "#617780"]
+      },
+      {
+        id: "kagura", name: "神樂滑雪場", english: "Kagura Ski Resort",
+        area: "新潟", region: "新潟", location: "新潟縣湯澤町",
+        levels: ["beginner", "intermediate", "advanced"], styles: ["ski", "snowboard"],
+        vibes: ["powder", "variety"], tags: ["三大區域", "粉雪地形", "田代湖景"],
+        summary: "由神樂、田代與三俣三區組成，可探索多樣雪道與自然地形。",
+        detail: "官方頁面將神樂雪場分為神樂、田代與三俣三個區域，涵蓋初中級雪道、粉雪與林間地形；當季區域連通與安全規則請查官方資訊。",
+        official: "https://www.princehotels.com/en/ski/kagura/", colors: ["#879caa", "#536b7b"]
+      },
+      {
+        id: "lotte-arai", name: "樂天新井度假村", english: "LOTTE ARAI RESORT",
+        area: "新潟", region: "新潟", location: "新潟縣妙高市",
+        levels: ["beginner", "intermediate", "advanced"], styles: ["ski", "snowboard"],
+        vibes: ["powder", "family", "variety"], tags: ["自由滑行區", "度假設施", "雪上活動"],
+        summary: "結合雪場、住宿與雪上活動，並設有依規則開放的自由滑行區。",
+        detail: "官方雪場資料提供一般雪道、自由滑行區、雪場規則與度假設施資訊。自由滑行區具有額外風險與規範，必須依官方安全說明行動。",
+        official: "https://www.lottehotel.com/arai-resort/en", colors: ["#9b8f9f", "#66586a"]
+      },
+      {
+        id: "marunuma-kogen", name: "丸沼高原滑雪場", english: "Marunuma Kogen Ski Resort",
+        area: "關東・山梨", region: "群馬", location: "群馬縣片品村",
+        levels: ["beginner", "intermediate", "advanced"], styles: ["ski", "snowboard"],
+        vibes: ["access", "variety", "scenery"], tags: ["日光白根山", "多級雪道", "纜車資訊"],
+        summary: "位於日光白根山一帶，官方雪道狀態頁涵蓋初、中、進階區域。",
+        detail: "官方網站提供初、中、進階雪道、纜車與當日狀態頁面。本站只保留穩定的分類資訊，實際營運與開放範圍請以官方頁面為準。",
+        official: "https://www.marunuma.jp/winter/", colors: ["#7f9e95", "#4c6b62"]
+      },
+      {
+        id: "fujiten", name: "富士天滑雪場", english: "Fujiten Snow Resort",
+        area: "關東・山梨", region: "山梨", location: "山梨縣鳴澤村",
+        levels: ["beginner", "intermediate", "advanced"], styles: ["ski", "snowboard"],
+        vibes: ["access", "family", "scenery"], tags: ["富士山周邊", "親子雪地", "滑雪與單板"],
+        summary: "位於富士山周邊，兼具滑雪、單板與親子雪地活動。",
+        detail: "官方網站提供滑雪、單板、雪具租借、雪校與親子雪地活動資訊；營業日期與夜滑等季節性內容請在出發前核對。",
+        official: "https://www.fujiten.net/en/", colors: ["#8ea5b1", "#506976"]
+      },
+      {
+        id: "takasu", name: "高鷲雪上樂園", english: "Takasu Snow Park",
+        area: "岐阜・滋賀", region: "岐阜", location: "岐阜縣郡上市",
+        levels: ["beginner", "intermediate", "advanced"], styles: ["ski", "snowboard"],
+        vibes: ["family", "variety", "access"], tags: ["寬闊雪道", "地形公園", "可連接 Dynaland"],
+        summary: "擁有寬闊多級雪道與地形公園，並可依當季狀況連接 Dynaland。",
+        detail: "官方雪道與常見問題頁列出初、中、進階路線，包含適合初學者的寬闊雪道與地形公園；與 Dynaland 的連接請以當季公告為準。",
+        official: "https://www.takasu.gr.jp/", colors: ["#8399ad", "#52677c"]
+      },
+      {
+        id: "gransnow-okuibuki", name: "GRANSNOW 奧伊吹", english: "GRANSNOW OKUIBUKI",
+        area: "岐阜・滋賀", region: "滋賀", location: "滋賀縣米原市",
+        levels: ["beginner", "intermediate", "advanced"], styles: ["ski", "snowboard"],
+        vibes: ["family", "variety", "access"], tags: ["關西地區", "多級雪道", "親子友善"],
+        summary: "位於滋賀北部，官方介紹的雪道涵蓋兒童、初學至進階滑行者。",
+        detail: "官方網站介紹奧伊吹位於滋賀北部，設有適合兒童、初學者到進階者的多級雪道；即時雪況、開放雪道及接駁資訊請依官方公告。",
+        official: "https://okuibuki.com/", colors: ["#91a0a8", "#5d6b72"]
+      }
+    ];
+
+    const levelLabels = { beginner: "初階", intermediate: "中階", advanced: "進階" };
+    const styleLabels = { ski: "雙板", snowboard: "單板" };
+    const areaOrder = ["北海道", "東北", "長野", "新潟", "關東・山梨", "岐阜・滋賀"];
+    const $ = (selector, scope = document) => scope.querySelector(selector);
+    const resortGrid = $("#resortGrid");
+    const searchInput = $("#searchInput");
+    const regionFilter = $("#regionFilter");
+    const levelFilter = $("#levelFilter");
+    const styleFilter = $("#styleFilter");
+    const resultCount = $("#resultCount");
+    const detailDialog = $("#detailDialog");
+    const finderDialog = $("#finderDialog");
+    const favoritesDialog = $("#favoritesDialog");
+    const compareDialog = $("#compareDialog");
+    const quizNext = $("#quizNext");
+    const quizBack = $("#quizBack");
+    const FAVORITES_KEY = "japanSnowGuideFavoritesV3";
+    let activeResort = null;
+    let quizStep = 1;
+    let quizAnswers = { level: null, area: null, priority: null };
+    let favorites = loadFavorites();
+    let compareSelection = [];
+    let toastTimer;
+
+    function escapeHTML(value) {
+      return String(value).replace(/[&<>'"]/g, (character) => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;"
+      })[character]);
+    }
+
+    function loadFavorites() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(FAVORITES_KEY) || "[]");
+        const validIds = new Set(resorts.map((resort) => resort.id));
+        return new Set(Array.isArray(saved) ? saved.filter((id) => validIds.has(id)) : []);
+      } catch {
+        return new Set();
+      }
+    }
+
+    function saveFavorites() {
+      try {
+        localStorage.setItem(FAVORITES_KEY, JSON.stringify([...favorites]));
+      } catch {
+        showToast("此瀏覽器目前無法永久保存收藏");
+      }
+    }
+
+    function openModal(dialog) {
+      document.body.classList.add("modal-open");
+      if (typeof dialog.showModal === "function") dialog.showModal();
+      else dialog.setAttribute("open", "");
+    }
+
+    function closeModal(dialog) {
+      if (typeof dialog.close === "function") dialog.close();
+      else dialog.removeAttribute("open");
+      syncModalState();
+    }
+
+    function syncModalState() {
+      const hasOpenDialog = [detailDialog, finderDialog, favoritesDialog, compareDialog].some((dialog) => dialog.open || dialog.hasAttribute("open"));
+      document.body.classList.toggle("modal-open", hasOpenDialog);
+    }
+
+    function populateRegions() {
+      areaOrder.forEach((region) => {
+          const option = document.createElement("option");
+          option.value = region;
+          option.textContent = region;
+          regionFilter.appendChild(option);
+      });
+    }
+
+    function createCard(resort, index) {
+      const tags = resort.tags.map((tag) => `<span class="tag">${escapeHTML(tag)}</span>`).join("");
+      const isFavorite = favorites.has(resort.id);
+      const isCompared = compareSelection.includes(resort.id);
+      return `
+        <article class="resort-card" style="--tone-a:${resort.colors[0]};--tone-b:${resort.colors[1]}">
+          <div class="card-visual" role="img" aria-label="${escapeHTML(resort.name)}的抽象雪山插畫">
+            <span class="card-number">NO. ${String(index + 1).padStart(2, "0")}</span>
+            <span class="card-region">${escapeHTML(resort.area)}</span>
+          </div>
+          <div class="card-body">
+            <p class="card-kana">${escapeHTML(resort.english)}</p>
+            <h3>${escapeHTML(resort.name)}</h3>
+            <p>${escapeHTML(resort.summary)}</p>
+            <div class="tags" aria-label="雪場特色">${tags}</div>
+            <div class="card-footer">
+              <div class="card-tools" aria-label="規劃工具">
+                <button class="mini-action favorite ${isFavorite ? "active" : ""}" type="button" data-favorite-id="${resort.id}" aria-pressed="${isFavorite}" aria-label="${isFavorite ? "取消收藏" : "收藏"}${escapeHTML(resort.name)}"><span class="action-symbol" aria-hidden="true">${isFavorite ? "♥" : "♡"}</span> 收藏</button>
+                <button class="mini-action ${isCompared ? "active" : ""}" type="button" data-compare-id="${resort.id}" aria-pressed="${isCompared}" aria-label="${isCompared ? "移出比較" : "加入比較"}${escapeHTML(resort.name)}"><span class="action-symbol" aria-hidden="true">⇄</span> 比較</button>
+              </div>
+              <button class="detail-button" type="button" data-resort-id="${resort.id}" aria-label="查看${escapeHTML(resort.name)}詳細資訊">查看雪場 <i aria-hidden="true">→</i></button>
+            </div>
+          </div>
+        </article>`;
+    }
+
+    function getFilteredResorts() {
+      const keyword = searchInput.value.trim().toLocaleLowerCase("zh-Hant");
+      return resorts.filter((resort) => {
+        const searchable = [resort.name, resort.english, resort.area, resort.region, resort.location, resort.summary, ...resort.tags].join(" ").toLocaleLowerCase("zh-Hant");
+        return (!keyword || searchable.includes(keyword))
+          && (regionFilter.value === "all" || resort.area === regionFilter.value)
+          && (levelFilter.value === "all" || resort.levels.includes(levelFilter.value))
+          && (styleFilter.value === "all" || resort.styles.includes(styleFilter.value));
+      });
+    }
+
+    function renderResorts() {
+      const filtered = getFilteredResorts();
+      resultCount.innerHTML = `顯示 <strong>${filtered.length}</strong> 座雪場（目前資料共 ${resorts.length} 座）`;
+      updateMapActive();
+      if (!filtered.length) {
+        resortGrid.innerHTML = `
+          <div class="empty-state">
+            <strong>目前沒有符合的雪場</strong>
+            <p>試著放寬地區、程度或滑行方式。</p>
+            <button class="button-secondary" id="emptyReset" type="button">清除篩選</button>
+          </div>`;
+        $("#emptyReset").addEventListener("click", resetFilters);
+        syncPlannerUI();
+        return;
+      }
+      resortGrid.innerHTML = filtered.map((resort) => createCard(resort, resorts.indexOf(resort))).join("");
+      syncPlannerUI();
+    }
+
+    function openDetails(id) {
+      const resort = resorts.find((item) => item.id === id);
+      if (!resort) return;
+      activeResort = resort;
+      $("#dialogHero").style.setProperty("--dialog-a", resort.colors[0]);
+      $("#dialogHero").style.setProperty("--dialog-b", resort.colors[1]);
+      $("#dialogRegion").textContent = `${resort.area} · ${resort.region} · ${resort.english}`;
+      $("#dialogTitle").textContent = resort.name;
+      $("#dialogIntro").textContent = resort.detail;
+      $("#dialogLocation").textContent = resort.location;
+      $("#dialogLevels").textContent = resort.levels.map((level) => levelLabels[level]).join("、");
+      $("#dialogStyles").textContent = resort.styles.map((style) => styleLabels[style]).join("、");
+      $("#officialLink").href = resort.official;
+      updateDetailPlannerActions();
+      openModal(detailDialog);
+    }
+
+    function closeDetails() {
+      closeModal(detailDialog);
+    }
+
+    function openFinderDialog() {
+      resetQuiz();
+      openModal(finderDialog);
+    }
+
+    function closeFinderDialog() {
+      closeModal(finderDialog);
+    }
+
+    function syncPlannerUI() {
+      $("#favoriteCount").textContent = String(favorites.size);
+      $("#favoriteNavCount").textContent = String(favorites.size);
+      $("#compareCount").textContent = `${compareSelection.length} / 2`;
+      $("#plannerDock").classList.toggle("active", favorites.size > 0 || compareSelection.length > 0);
+      updateDetailPlannerActions();
+    }
+
+    function updateDetailPlannerActions() {
+      if (!activeResort) return;
+      const favoriteButton = $("#detailFavorite");
+      const compareButton = $("#detailCompare");
+      const isFavorite = favorites.has(activeResort.id);
+      const isCompared = compareSelection.includes(activeResort.id);
+      favoriteButton.classList.toggle("active", isFavorite);
+      favoriteButton.setAttribute("aria-pressed", String(isFavorite));
+      favoriteButton.textContent = isFavorite ? "♥ 已收藏" : "♡ 加入收藏";
+      compareButton.classList.toggle("active", isCompared);
+      compareButton.setAttribute("aria-pressed", String(isCompared));
+      compareButton.textContent = isCompared ? "✓ 已加入比較" : "⇄ 加入比較";
+    }
+
+    function toggleFavorite(id) {
+      const resort = resorts.find((item) => item.id === id);
+      if (!resort) return;
+      const wasFavorite = favorites.has(id);
+      if (wasFavorite) favorites.delete(id);
+      else favorites.add(id);
+      saveFavorites();
+      renderResorts();
+      if (favoritesDialog.open) renderFavorites();
+      showToast(wasFavorite ? `已取消收藏：${resort.name}` : `已收藏：${resort.name}`);
+    }
+
+    function toggleCompare(id) {
+      const resort = resorts.find((item) => item.id === id);
+      if (!resort) return;
+      const index = compareSelection.indexOf(id);
+      if (index >= 0) {
+        compareSelection.splice(index, 1);
+        showToast(`已移出比較：${resort.name}`);
+      } else if (compareSelection.length >= 2) {
+        showToast("最多比較兩座，請先取消一座");
+        return;
+      } else {
+        compareSelection.push(id);
+        showToast(compareSelection.length === 2 ? "已選滿兩座，可開啟比較" : `已加入比較：${resort.name}`);
+      }
+      renderResorts();
+      if (favoritesDialog.open) renderFavorites();
+      if (compareDialog.open) renderCompare();
+    }
+
+    function renderFavorites() {
+      const savedResorts = resorts.filter((resort) => favorites.has(resort.id));
+      if (!savedResorts.length) {
+        $("#favoritesList").innerHTML = `
+          <div class="saved-empty">
+            <strong>收藏清單還是空的</strong>
+            <p>在任一雪場卡片按下「收藏」，就會出現在這裡。</p>
+          </div>`;
+        return;
+      }
+      $("#favoritesList").innerHTML = savedResorts.map((resort) => {
+        const number = resorts.indexOf(resort) + 1;
+        const isCompared = compareSelection.includes(resort.id);
+        return `
+          <article class="saved-row">
+            <span class="saved-row-number">${String(number).padStart(2, "0")}</span>
+            <div><strong>${escapeHTML(resort.name)}</strong><small>${escapeHTML(resort.area)} · ${escapeHTML(resort.english)}</small></div>
+            <div class="saved-row-actions">
+              <button type="button" data-saved-detail="${resort.id}">查看</button>
+              <button type="button" data-saved-compare="${resort.id}">${isCompared ? "移出比較" : "加入比較"}</button>
+              <button type="button" data-saved-remove="${resort.id}">取消收藏</button>
+            </div>
+          </article>`;
+      }).join("");
+    }
+
+    function openFavoritesDialog() {
+      renderFavorites();
+      openModal(favoritesDialog);
+    }
+
+    function renderCompareCard(resort, position) {
+      return `
+        <article class="compare-card">
+          <span class="compare-card-number">CHOICE ${String(position).padStart(2, "0")}</span>
+          <h3>${escapeHTML(resort.name)}</h3>
+          <small>${escapeHTML(resort.english)}</small>
+          <div class="compare-facts">
+            <div class="compare-fact"><span>地區</span><b>${escapeHTML(resort.area)} · ${escapeHTML(resort.region)}</b></div>
+            <div class="compare-fact"><span>所在地</span><b>${escapeHTML(resort.location)}</b></div>
+            <div class="compare-fact"><span>程度</span><b>${resort.levels.map((level) => levelLabels[level]).join("、")}</b></div>
+            <div class="compare-fact"><span>滑行</span><b>${resort.styles.map((style) => styleLabels[style]).join("、")}</b></div>
+            <div class="compare-fact"><span>特色</span><b>${resort.tags.map(escapeHTML).join(" · ")}</b></div>
+          </div>
+          <p>${escapeHTML(resort.summary)}</p>
+          <div class="compare-card-actions">
+            <a href="${resort.official}" target="_blank" rel="noopener noreferrer">官方網站 ↗</a>
+            <button type="button" data-compare-detail="${resort.id}">查看詳細</button>
+            <button type="button" data-compare-remove="${resort.id}">移出比較</button>
+          </div>
+        </article>`;
+    }
+
+    function renderCompare() {
+      const selected = compareSelection.map((id) => resorts.find((resort) => resort.id === id)).filter(Boolean);
+      const cards = selected.map((resort, index) => renderCompareCard(resort, index + 1));
+      while (cards.length < 2) {
+        cards.push(`
+          <div class="compare-slot">
+            <div><strong>再選一座雪場</strong><p>回到雪場卡片按下「比較」，這裡就會補上第二欄。</p></div>
+          </div>`);
+      }
+      $("#compareGrid").innerHTML = cards.join("");
+    }
+
+    function openCompareDialog() {
+      renderCompare();
+      openModal(compareDialog);
+    }
+
+    function resetQuiz() {
+      quizStep = 1;
+      quizAnswers = { level: null, area: null, priority: null };
+      finderDialog.querySelectorAll(".quiz-option").forEach((option) => option.classList.remove("selected"));
+      showQuizStep();
+    }
+
+    function showQuizStep() {
+      finderDialog.querySelectorAll(".quiz-step").forEach((step) => {
+        step.classList.toggle("active", Number(step.dataset.step) === quizStep);
+      });
+      $("#quizProgress").style.width = `${Math.min(quizStep, 3) / 3 * 100}%`;
+      quizBack.hidden = quizStep === 1 || quizStep === 4;
+      quizNext.hidden = false;
+      if (quizStep === 4) {
+        quizNext.textContent = "重新作答";
+        quizNext.disabled = false;
+      } else {
+        const key = ["level", "area", "priority"][quizStep - 1];
+        quizNext.textContent = quizStep === 3 ? "查看推薦" : "下一步";
+        quizNext.disabled = !quizAnswers[key];
+      }
+    }
+
+    function renderQuizResults() {
+      const ranked = resorts
+        .map((resort, index) => {
+          let score = 0;
+          if (quizAnswers.level === "all") score += resort.levels.length === 3 ? 2 : 0;
+          else score += resort.levels.includes(quizAnswers.level) ? 2 : -6;
+          if (quizAnswers.area !== "all") score += resort.area === quizAnswers.area ? 5 : -1;
+          if (resort.vibes.includes(quizAnswers.priority)) score += 6;
+          return { resort, score, index };
+        })
+        .sort((a, b) => b.score - a.score || a.index - b.index)
+        .slice(0, 3);
+
+      $("#quizResults").innerHTML = ranked.map(({ resort }, index) => `
+        <div class="quiz-result">
+          <span>${index + 1}</span>
+          <div><strong>${escapeHTML(resort.name)}</strong><small>${escapeHTML(resort.area)} · ${escapeHTML(resort.summary)}</small></div>
+          <button type="button" data-result-id="${resort.id}">查看資料 →</button>
+        </div>`).join("");
+
+      $("#quizResults").querySelectorAll("[data-result-id]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const resortId = button.dataset.resultId;
+          closeFinderDialog();
+          setTimeout(() => openDetails(resortId), 0);
+        });
+      });
+    }
+
+    function updateMapActive() {
+      document.querySelectorAll("[data-area]").forEach((button) => {
+        if (button.closest("#finderDialog")) return;
+        button.classList.toggle("active", regionFilter.value !== "all" && button.dataset.area === regionFilter.value);
+      });
+    }
+
+    function selectMapArea(area) {
+      searchInput.value = "";
+      regionFilter.value = area;
+      renderResorts();
+      $("#explore").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function resetFilters() {
+      searchInput.value = "";
+      regionFilter.value = "all";
+      levelFilter.value = "all";
+      styleFilter.value = "all";
+      $("#heroSearch").value = "";
+      renderResorts();
+      updateMapActive();
+    }
+
+    function showToast(message) {
+      clearTimeout(toastTimer);
+      $("#toast").textContent = message;
+      $("#toast").classList.add("show");
+      toastTimer = setTimeout(() => $("#toast").classList.remove("show"), 1800);
+    }
+
+    populateRegions();
+    renderResorts();
+
+    [searchInput, regionFilter, levelFilter, styleFilter].forEach((control) => {
+      control.addEventListener(control.tagName === "INPUT" ? "input" : "change", renderResorts);
+    });
+    $("#resetFilters").addEventListener("click", resetFilters);
+    resortGrid.addEventListener("click", (event) => {
+      const favoriteButton = event.target.closest("[data-favorite-id]");
+      const compareButton = event.target.closest("[data-compare-id]");
+      const detailButton = event.target.closest("[data-resort-id]");
+      if (favoriteButton) toggleFavorite(favoriteButton.dataset.favoriteId);
+      else if (compareButton) toggleCompare(compareButton.dataset.compareId);
+      else if (detailButton) openDetails(detailButton.dataset.resortId);
+    });
+
+    $("#map").querySelectorAll("[data-area]").forEach((button) => {
+      button.addEventListener("click", () => selectMapArea(button.dataset.area));
+    });
+
+    [$("#openFinder"), $("#openFinderHero")].forEach((button) => button.addEventListener("click", openFinderDialog));
+    $("#finderClose").addEventListener("click", closeFinderDialog);
+    finderDialog.addEventListener("click", (event) => {
+      if (event.target === finderDialog) closeFinderDialog();
+    });
+    finderDialog.addEventListener("close", syncModalState);
+    finderDialog.querySelectorAll(".quiz-option").forEach((option) => {
+      option.addEventListener("click", () => {
+        quizAnswers[option.dataset.key] = option.dataset.value;
+        option.closest(".quiz-step").querySelectorAll(".quiz-option").forEach((item) => item.classList.remove("selected"));
+        option.classList.add("selected");
+        showQuizStep();
+      });
+    });
+    quizNext.addEventListener("click", () => {
+      if (quizStep === 4) {
+        resetQuiz();
+        return;
+      }
+      if (quizNext.disabled) return;
+      if (quizStep === 3) renderQuizResults();
+      quizStep += 1;
+      showQuizStep();
+    });
+    quizBack.addEventListener("click", () => {
+      if (quizStep > 1) quizStep -= 1;
+      showQuizStep();
+    });
+
+    $("#heroSearchForm").addEventListener("submit", (event) => {
+      event.preventDefault();
+      searchInput.value = $("#heroSearch").value;
+      renderResorts();
+      $("#explore").scrollIntoView({ behavior: "smooth" });
+      setTimeout(() => searchInput.focus({ preventScroll: true }), 500);
+    });
+
+    $("#dialogClose").addEventListener("click", closeDetails);
+    detailDialog.addEventListener("click", (event) => {
+      if (event.target === detailDialog) closeDetails();
+    });
+    detailDialog.addEventListener("close", syncModalState);
+    $("#detailFavorite").addEventListener("click", () => {
+      if (activeResort) toggleFavorite(activeResort.id);
+    });
+    $("#detailCompare").addEventListener("click", () => {
+      if (activeResort) toggleCompare(activeResort.id);
+    });
+
+    [$("#openFavorites"), $("#openFavoritesNav")].forEach((button) => button.addEventListener("click", () => {
+      mainNav?.classList.remove("open");
+      openFavoritesDialog();
+    }));
+    $("#openCompare").addEventListener("click", openCompareDialog);
+    $("#favoritesClose").addEventListener("click", () => closeModal(favoritesDialog));
+    $("#compareClose").addEventListener("click", () => closeModal(compareDialog));
+    [favoritesDialog, compareDialog].forEach((dialog) => {
+      dialog.addEventListener("click", (event) => {
+        if (event.target === dialog) closeModal(dialog);
+      });
+      dialog.addEventListener("close", syncModalState);
+    });
+    $("#favoritesList").addEventListener("click", (event) => {
+      const detailButton = event.target.closest("[data-saved-detail]");
+      const compareButton = event.target.closest("[data-saved-compare]");
+      const removeButton = event.target.closest("[data-saved-remove]");
+      if (detailButton) {
+        const id = detailButton.dataset.savedDetail;
+        closeModal(favoritesDialog);
+        setTimeout(() => openDetails(id), 0);
+      } else if (compareButton) toggleCompare(compareButton.dataset.savedCompare);
+      else if (removeButton) toggleFavorite(removeButton.dataset.savedRemove);
+    });
+    $("#compareGrid").addEventListener("click", (event) => {
+      const detailButton = event.target.closest("[data-compare-detail]");
+      const removeButton = event.target.closest("[data-compare-remove]");
+      if (detailButton) {
+        const id = detailButton.dataset.compareDetail;
+        closeModal(compareDialog);
+        setTimeout(() => openDetails(id), 0);
+      } else if (removeButton) toggleCompare(removeButton.dataset.compareRemove);
+    });
+
+    $("#copyNameButton").addEventListener("click", async () => {
+      if (!activeResort) return;
+      try {
+        await navigator.clipboard.writeText(`${activeResort.name} (${activeResort.english})`);
+        showToast("已複製雪場名稱");
+      } catch {
+        showToast("瀏覽器未允許複製，請手動選取名稱");
+      }
+    });
+
+    const menuButton = $("#menuButton");
+    const mainNav = $("#mainNav");
+    menuButton.addEventListener("click", () => {
+      const isOpen = mainNav.classList.toggle("open");
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+      menuButton.setAttribute("aria-label", isOpen ? "關閉導覽選單" : "開啟導覽選單");
+    });
+    mainNav.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => {
+      mainNav.classList.remove("open");
+      menuButton.setAttribute("aria-expanded", "false");
+    }));
+
+    window.addEventListener("scroll", () => {
+      $("#siteHeader").classList.toggle("scrolled", window.scrollY > 8);
+    }, { passive: true });
+  </script>
+</body>
+</html>
